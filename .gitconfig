@@ -1,0 +1,58 @@
+[user]
+name = Matthieu Pizenberg
+email = matthieu.pizenberg@gmail.com
+
+[core]
+editor = vim
+
+[color]
+ui = auto
+diff = auto
+log = auto
+branch = auto
+
+[merge]
+tool = meld
+
+[alias]
+ci = commit
+co = checkout
+st = status
+br = branch
+
+lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+lg = !"git lg1"
+
+# Integrate work from a remote : pull the request
+integratepull = "!f() { \
+echo '#############################################'; \
+echo 'Updating from ref repository :'; \
+echo ''; \
+git checkout $2; \
+git pull ref $2; \
+echo '#############################################'; \
+echo "fetching the pull request from $1 :"; \
+echo ''; \
+git fetch $1; \
+echo '#############################################'; \
+echo 'Trying to merge fast-forward the pull request :'; \
+echo ''; \
+git checkout -b $1-$2; \
+git merge --ff-only $1/$2; \
+}; f"
+
+# Integrate work from a remote : push the validated work
+integratepush = "!f() { \
+git checkout $2; \
+git merge --ff-only $1-$2; \
+git branch -D $1-$2; \
+git push ref $2; \
+}; f"
+
+# Integrate work from a remote : cancel the integration process
+# because builds or tests failed
+integratecancel = "!f() { \
+git checkout $2; \
+git branch -D $1-$2; \
+}; f"
