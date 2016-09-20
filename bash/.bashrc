@@ -11,4 +11,4 @@ f=$HOME/.bash_aliases && [ -f $f ] && source $f
 f=$HOME/.git-completion.bash && [ -f $f ] && source $f
 
 # Activate fuzzy finder
-f=$HOME/.fzf.bash && [ -f $f ] && source $f
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
