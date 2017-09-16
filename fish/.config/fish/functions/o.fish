@@ -1,3 +1,3 @@
 function o
-	gio open $argv
+	xdg-open $argv
 end
