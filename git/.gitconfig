@@ -14,6 +14,9 @@ branch = auto
 [merge]
 tool = meld
 
+[rerere]
+enabled = true
+
 [alias]
 ci = commit
 co = checkout
