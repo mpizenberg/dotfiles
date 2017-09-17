@@ -1,0 +1,75 @@
+
+################################ Desktop Environment
+
+Gnome 3
+(maybe test way-cooler later)
+fish (shell)
+
+################################ System
+
+htop
+OpenVPN
+etcher
+
+################################ Programming
+
+tmux
+terminator
+vim
+neovim
+atom
+gedit
+meld
+stow
+
+conda (miniconda python)
+nvm (node version manager)
+elm
+
+################################ Web
+
+firefox (stable)
+chromium
+opera
+
+################################ Entertainment
+
+calibre (ebooks)
+Orion (twitch client)
+Transmission
+vlc
+WebTorrent
+Kodi
+
+################################ Multimedia
+
+gpick
+darktable
+gimp
+inkscape
+pinta
+kdenlive
+pitivi
+Natron
+obs-studio
+Audacity
+blender
+MeshLab
+
+################################ Productivity
+
+Latex
+Libreoffice
+Scribus
+Mendeley
+Okular
+Xournal (edit pdf)
+veracrypt
+Simple Screen Recorder
+Umbrello
+
+################################ 7Robot
+
+Mplab X
+Freecad
+
