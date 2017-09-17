@@ -9,7 +9,8 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Nerdtree file explorer
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Great collection of color themes
 Plug 'flazz/vim-colorschemes'
 " correct terminal palette colors
@@ -97,7 +98,7 @@ set showmatch                    " highlight matching [{()}]
 set ignorecase                   " case insensitive
 " set laststatus=2                 " show only one status line
 set encoding=utf8
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 let g:elm_format_autosave = 1    " use elm-format
 let g:rustfmt_autosave = 1       " use rustfmt
@@ -126,11 +127,6 @@ set foldmethod=indent            " fold based on indent level
 
 
 " MOVEMENT ##########################################################{{{
-" move vertically by visual line
-if empty(system("setxkbmap -print|grep bepo"))
-	noremap j gj
-	noremap k gk
-endif
 " ,, is escape
 inoremap ,, <esc>
 " }}}
@@ -138,8 +134,9 @@ inoremap ,, <esc>
 
 
 " NERDTREE ##########################################################{{{
-autocmd vimenter * NERDTree
-let NERDTreeIgnore = ['\.pyc$','__pycache__']
+" autocmd vimenter * NERDTree
+" let NERDTreeIgnore = ['\.pyc$','__pycache__']
+let NERDTreeShowHidden=1
 set shell=sh
 let g:NERDTreeIndicatorMapCustom = {
 	\ "Modified"  : "✹",
@@ -153,6 +150,11 @@ let g:NERDTreeIndicatorMapCustom = {
 	\ "Unknown"   : "?"
 	\ }
 let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+" https://rumpelsepp.github.io/2016/08/12/let-nerdtree-respect-gitignore.html
+let loaded_netrwPlugin=1         " disable builtin bloated netrw plugin
+noremap <C-n> :NERDTreeToggle<CR>
+" close if only nerdtree left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " }}}
 
 
