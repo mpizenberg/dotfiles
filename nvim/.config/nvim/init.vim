@@ -98,8 +98,7 @@ set showmatch                    " highlight matching [{()}]
 set ignorecase                   " case insensitive
 " set laststatus=2                 " show only one status line
 set encoding=utf8
-" let g:airline_powerline_fonts = 1
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+let g:airline_powerline_fonts = 1
 let g:elm_format_autosave = 1    " use elm-format
 let g:rustfmt_autosave = 1       " use rustfmt
 " }}}
