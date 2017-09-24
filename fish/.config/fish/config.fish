@@ -14,12 +14,6 @@ set PATH $HOME/scripts $PATH
 # use default desktop opener in nnn
 set NNN_FALLBACK_OPENER xdg-open
 
-# Load autojump if it is installed
-set --local autojump_path /usr/share/autojump/autojump.fish
-if test -e $autojump_path
-	source $autojump_path
-end
-
 # Load conda if installed
 set --local conda_path $HOME/miniconda3/etc/fish/conf.d/conda.fish
 if test -e $conda_path
