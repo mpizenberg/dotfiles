@@ -31,7 +31,7 @@ I'm using fisherman to manage fish plugins.
 After using `stow`, go into config folder and install plugins with:
 
 ```shell
-cat fishfile | fisher
+cat fishfile | fisher add
 ```
 
 ## nvim / vim
