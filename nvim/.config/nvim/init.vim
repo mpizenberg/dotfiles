@@ -12,7 +12,9 @@ Plug 'bling/vim-airline'                 " Personalized status bar
 " Syntax and completion
 Plug 'tomtom/tcomment_vim'               " Comment any type of code (gcc, gcip)
 Plug 'w0rp/ale'                          " Syntax checking
-Plug 'Shougo/deoplete.nvim'              " Auto completion tools
+" Plug 'budziq/ale'                          " Syntax checking
+Plug 'sbdchd/neoformat'                  " Formatting code
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Auto completion tools
 Plug 'SirVer/ultisnips'                  " Snippets made easy (<Tab>)
 Plug 'honza/vim-snippets'
 
@@ -23,8 +25,12 @@ Plug 'elmcast/elm-vim'                   " elm language
 Plug 'pbogut/deoplete-elm'               " elm completion for deoplete
 Plug 'neovimhaskell/haskell-vim'         " haskell language
 Plug 'eagletmt/neco-ghc'                 " haskell completion for deoplete
+Plug 'purescript-contrib/purescript-vim' " purescript language
 Plug 'rust-lang/rust.vim'                " rust language
+Plug 'racer-rust/vim-racer'              " rust completion
+Plug 'cespare/vim-toml'                  " rust config files
 Plug 'lervag/vimtex'                     " Lite LaTeX plugin
+Plug 'idris-hackers/idris-vim'           " idris language
 
 " Git integration
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
@@ -58,7 +64,7 @@ set tabstop=4                    " number of visual spaces per TAB
 "set softtabstop=4                " number of spaces inserted in insert mode
 set shiftwidth=4                 " number of spaces for 1 indentation level
 " make tabs and trailing spaces visible
-set list listchars=tab:▸\ ,trail:∎
+set list listchars=tab:·\ ,trail:∎
 set autoindent                   " copy indent on new line
 filetype plugin indent on        " load filetype-specific indent files
 " Align blocks and keep them selected
@@ -119,6 +125,9 @@ let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
 	let g:deoplete#omni#input_patterns = {}
 endif
+" Close preview window when complete done
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
 
 " UltiSnips config
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -130,7 +139,22 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 
 " SYNTAX CHECKING ###################################################{{{
 let g:ale_lint_on_text_changed = 0
+let g:ale_linters = {
+\   'cpp': ['clang', 'clangtidy', 'cppcheck', 'cpplint', 'g++'],
+\}
 map <Leader>s :ALEToggle<CR>
+let g:ale_rust_cargo_check_examples = 1
+let g:ale_rust_cargo_check_tests = 1
+" }}}
+
+
+
+" AUTO FORMATTING ###################################################{{{
+" Run neoformat on save
+augroup fmt
+	autocmd!
+	autocmd BufWritePre * undojoin | Neoformat
+augroup END
 " }}}
 
 
