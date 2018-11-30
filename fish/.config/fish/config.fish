@@ -9,3 +9,10 @@ add_to_path $HOME/.cargo/bin
 
 # Load conda if installed
 add_to_path $HOME/miniconda3/bin
+
+# Load jenv if installed
+add_to_path $HOME/.jenv/bin
+add_to_path $HOME/.jenv/shims
+
+# Add Matlab installed locally
+add_to_path $HOME/programs/matlab/bin
