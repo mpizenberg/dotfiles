@@ -7,30 +7,21 @@ call plug#begin('~/.config/nvim/plugged')
 " User interface
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }    " Nerdtree file explorer
 Plug 'flazz/vim-colorschemes'            " Great collection of color themes
-Plug 'bling/vim-airline'                 " Personalized status bar
+Plug 'itchyny/lightline.vim'             " Light status line
 
 " Syntax and completion
 Plug 'tomtom/tcomment_vim'               " Comment any type of code (gcc, gcip)
-Plug 'w0rp/ale'                          " Syntax checking
-" Plug 'budziq/ale'                          " Syntax checking
-Plug 'sbdchd/neoformat'                  " Formatting code
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " Auto completion tools
-Plug 'SirVer/ultisnips'                  " Snippets made easy (<Tab>)
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Language server integration
 Plug 'honza/vim-snippets'
 
 " Language specific
+Plug 'plasticboy/vim-markdown'           " markdown syntax
 Plug 'mitsuhiko/vim-rst'                 " rst syntax
 Plug 'dag/vim-fish'                      " fish shell syntax
-Plug 'elmcast/elm-vim'                   " elm language
-Plug 'pbogut/deoplete-elm'               " elm completion for deoplete
-Plug 'neovimhaskell/haskell-vim'         " haskell language
-Plug 'eagletmt/neco-ghc'                 " haskell completion for deoplete
-Plug 'purescript-contrib/purescript-vim' " purescript language
-Plug 'rust-lang/rust.vim'                " rust language
-Plug 'racer-rust/vim-racer'              " rust completion
+Plug 'andys8/vim-elm-syntax'             " elm language
 Plug 'cespare/vim-toml'                  " rust config files
-Plug 'lervag/vimtex'                     " Lite LaTeX plugin
 Plug 'idris-hackers/idris-vim'           " idris language
+Plug 'rust-spandex/spandex.vim'          " spandex language
 
 " Git integration
 Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
@@ -59,9 +50,9 @@ colorscheme jellybeans           " awesome colorscheme
 
 
 " INDENTATION #######################################################{{{
-"set expandtab                    " tabs are spaces
+" set expandtab                    " tabs are spaces
 set tabstop=4                    " number of visual spaces per TAB
-"set softtabstop=4                " number of spaces inserted in insert mode
+" set softtabstop=4                " number of spaces inserted in insert mode
 set shiftwidth=4                 " number of spaces for 1 indentation level
 " make tabs and trailing spaces visible
 set list listchars=tab:·\ ,trail:∎
@@ -83,7 +74,6 @@ set lazyredraw                   " redraw only when we need to.
 set showmatch                    " highlight matching [{()}]
 set ignorecase                   " case insensitive
 set encoding=utf8                " use UTF-8 encoding
-let g:airline_powerline_fonts = 1
 set conceallevel=2               " use vim conceal feature
 " }}}
 
@@ -104,7 +94,41 @@ set foldlevelstart=10            " open most folds by default
 set foldnestmax=10               " 10 nested fold max
 " space toggles folds
 nnoremap <space> za
-set foldmethod=indent            " fold based on indent level
+set foldmethod=syntax            " fold based on syntax
+" }}}
+
+
+
+" COC CONFIG  #######################################################{{{
+set hidden                       " if hidden is not set, TextEdit might fail
+set nobackup                     " Some servers have issues with backup files, see #649
+set nowritebackup                " Some servers have issues with backup files, see #649
+set cmdheight=2                  " Better display for messages
+set updatetime=300               " bad experience for diagnostic messages when it's default 4000
+set shortmess+=c                 " don't give |ins-completion-menu| messages
+set signcolumn=yes               " always show signcolumns
+let g:coc_snippet_next="<Tab>"   " use Tab to navigate to next snippet placeholder
+let g:coc_snippet_prev="<S-Tab>" " use Shift-Tab to previous snippet placeholder
+" }}}
+
+
+
+" STATUS LINE #######################################################{{{
+function! CocCurrentFunction()
+	return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = {
+	\ 'colorscheme': 'wombat',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+	\ },
+	\ 'component_function': {
+	\   'cocstatus': 'coc#status',
+	\   'currentfunction': 'CocCurrentFunction'
+	\ },
+	\ }
 " }}}
 
 
@@ -119,60 +143,26 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 
-" AUTO COMPLETION ###################################################{{{
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-if !exists('g:deoplete#omni#input_patterns')
-	let g:deoplete#omni#input_patterns = {}
-endif
-" Close preview window when complete done
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-
-" UltiSnips config
-let g:UltiSnipsExpandTrigger="<Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-" }}}
-
-
-
-" SYNTAX CHECKING ###################################################{{{
-let g:ale_lint_on_text_changed = 0
-let g:ale_linters = {
-\   'cpp': ['clang', 'clangtidy', 'cppcheck', 'cpplint', 'g++'],
-\}
-map <Leader>s :ALEToggle<CR>
-let g:ale_rust_cargo_check_examples = 1
-let g:ale_rust_cargo_check_tests = 1
-" }}}
-
-
-
-" AUTO FORMATTING ###################################################{{{
-" Run neoformat on save
-augroup fmt
-	autocmd!
-	autocmd BufWritePre * undojoin | Neoformat
-augroup END
-" }}}
-
-
-
 " LATEX CONFIGURATION ###############################################{{{
 let g:tex_flavor = 'latex'       " use latex flavor instead of plaintex
 let g:tex_conceal = "abdgm"      " display unicode math characters
-let g:deoplete#omni#input_patterns.tex = '\\(?:'
-	\ .  '\w*cite\w*(?:\s*\[[^]]*\]){0,2}\s*{[^}]*'
-	\ . '|\w*ref(?:\s*\{[^}]*|range\s*\{[^,}]*(?:}{)?)'
-	\ . '|hyperref\s*\[[^]]*'
-	\ . '|includegraphics\*?(?:\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-	\ . '|(?:include(?:only)?|input)\s*\{[^}]*'
-	\ . '|\w*(gls|Gls|GLS)(pl)?\w*(\s*\[[^]]*\]){0,2}\s*\{[^}]*'
-	\ . '|includepdf(\s*\[[^]]*\])?\s*\{[^}]*'
-	\ . '|includestandalone(\s*\[[^]]*\])?\s*\{[^}]*'
-	\ . '|usepackage(\s*\[[^]]*\])?\s*\{[^}]*'
-	\ . '|documentclass(\s*\[[^]]*\])?\s*\{[^}]*'
-	\ . '|\w*'
-	\ .')'
+" }}}
+
+
+
+" MARKDOWN ##########################################################{{{
+" disable header folding
+let g:vim_markdown_folding_disabled = 1
+
+" do not use conceal feature, the implementation is not so good
+let g:vim_markdown_conceal = 0
+
+" disable math tex conceal feature
+let g:tex_conceal = ""
+let g:vim_markdown_math = 1
+
+" support front matter of various format
+let g:vim_markdown_frontmatter = 1  " for YAML format
+let g:vim_markdown_toml_frontmatter = 1  " for TOML format
+let g:vim_markdown_json_frontmatter = 1  " for JSON format
 " }}}
