@@ -50,6 +50,17 @@ sudo vi /etc/dnf/automatic.conf
  -> download_updates = yes
  -> upply_updates = yes
 sudo systemctl enable --now dnf-automatic.timer
+
+sudo dnf -y install firewalld
+sudo systemctl enable firewalld
+sudo systemctl start firewalld
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --permanent --list-all
+sudo firewall-cmd --reload
+# Issue with SELinux, CF
+# https://serverfault.com/questions/819423/reverse-proxy-nginx-bad-gateway
+sudo setsebool -P httpd_can_network_connect true
 exit
 ```
 
@@ -59,8 +70,13 @@ exit
 ssh matthieu@server_address
 sudo dnf -y install epel-release
 sudo dnf -y upgrade
-sudo dnf -y install htop tmux vim neovim stow git nginx
+sudo dnf -y group install "Development Tools"
+sudo dnf -y install htop tmux vim neovim stow git nginx cmake
 ```
+
+## Install dotfiles
+
+CF https://github.com/mpizenberg/dotfiles
 
 ## Install nvm
 
@@ -68,7 +84,3 @@ sudo dnf -y install htop tmux vim neovim stow git nginx
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 nvm install --lts
 ```
-
-## Install dotfiles
-
-CF https://github.com/mpizenberg/dotfiles
