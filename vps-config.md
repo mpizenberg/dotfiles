@@ -58,9 +58,18 @@ sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
 sudo firewall-cmd --permanent --list-all
 sudo firewall-cmd --reload
-# Issue with SELinux, CF
+
+# Nginx
 # https://serverfault.com/questions/819423/reverse-proxy-nginx-bad-gateway
 sudo setsebool -P httpd_can_network_connect true
+
+# coturn (STUN/TURN server)
+sudo firewall-cmd --permanent --add-port=3478/udp
+sudo firewall-cmd --permanent --add-port=3478/tcp
+sudo firewall-cmd --permanent --add-port=5349/udp
+sudo firewall-cmd --permanent --add-port=5349/tcp
+sudo firewall-cmd --reload
+
 exit
 ```
 
