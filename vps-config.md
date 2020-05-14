@@ -2,7 +2,7 @@
 
 ## Create a new admin user
 
-```
+```sh
 ssh root@server_address
 adduser matthieu
 passwd matthieu
@@ -12,13 +12,13 @@ exit
 
 ## Add ssh key to VPS
 
-```
+```sh
 ssh-copy-id matthieu@server_address
 ```
 
 ## Remove root and password ssh
 
-```
+```sh
 ssh matthieu@server_address
 sudo vi /etc/ssh/sshd_config
  -> PermitRootLogin no
@@ -29,7 +29,7 @@ exit
 
 ## Enable cockpit monitoring
 
-```
+```sh
 ssh matthieu@server_address
 systemctl sudo enable --now cockpit.socket
 exit
@@ -42,7 +42,7 @@ http://server_address:9090
 
 CF https://www.tecmint.com/dnf-automatic-install-security-updates-automatically-in-centos-8/
 
-```
+```sh
 ssh matthieu@server_address
 sudo dnf -y install dnf-automatic
 sudo vi /etc/dnf/automatic.conf
@@ -55,16 +55,16 @@ exit
 
 ## Config packages
 
-```
+```sh
 ssh matthieu@server_address
 sudo dnf -y install epel-release
 sudo dnf -y upgrade
-sudo dnf -y install htop tmux vim neovim stow git
+sudo dnf -y install htop tmux vim neovim stow git nginx
 ```
 
 ## Install nvm
 
-```
+```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 nvm install --lts
 ```
