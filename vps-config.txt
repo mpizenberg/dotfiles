@@ -1,0 +1,74 @@
+# VPS setup on CentOS 8
+
+## Create a new admin user
+
+```
+ssh root@server_address
+adduser matthieu
+passwd matthieu
+usermod -aG wheel matthieu
+exit
+```
+
+## Add ssh key to VPS
+
+```
+ssh-copy-id matthieu@server_address
+```
+
+## Remove root and password ssh
+
+```
+ssh matthieu@server_address
+sudo vi /etc/ssh/sshd_config
+ -> PermitRootLogin no
+ -> PasswordAuthentication no
+sudo systemctl restart sshd
+exit
+```
+
+## Enable cockpit monitoring
+
+```
+ssh matthieu@server_address
+systemctl sudo enable --now cockpit.socket
+exit
+```
+
+The Web interface is now available at
+http://server_address:9090
+
+## Automatic security updates
+
+CF https://www.tecmint.com/dnf-automatic-install-security-updates-automatically-in-centos-8/
+
+```
+ssh matthieu@server_address
+sudo dnf -y install dnf-automatic
+sudo vi /etc/dnf/automatic.conf
+ -> upgrade_type = security
+ -> download_updates = yes
+ -> upply_updates = yes
+sudo systemctl enable --now dnf-automatic.timer
+exit
+```
+
+## Config packages
+
+```
+ssh matthieu@server_address
+sudo dnf -y install epel-release
+sudo dnf -y upgrade
+sudo dnf -y install htop tmux vim neovim stow git
+```
+
+## Install nvm
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+nvm install --lts
+```
+
+## Install dotfiles
+
+CF https://github.com/mpizenberg/dotfiles
