@@ -27,27 +27,34 @@ stow vim --no-folding
 
 ## fish
 
-I'm using fisherman to manage fish plugins.
-After using `stow`, go into config folder and install plugins with:
+I'm using [fisher](https://github.com/jorgebucaran/fisher) to manage fish plugins.
 
 ```shell
+stow fish --no-folding
+fisher self-update
 fisher
 ```
 
 ## nvim / vim
 
-I'm using Plug to manage neovim / vim plugins.
-After using `stow` and launching nvim / vim, install plugins with:
+I'm using [Plug](https://github.com/junegunn/vim-plug) to manage neovim / vim plugins.
 
-```vim
+```shell
+stow vim --no-folding
+vim
+:PlugUpgrade
 :PlugInstall
 ```
 
 ## tmux
 
-I'm using tpm to manage tmux plugins.
-After using `stow` and launching a tmux, install plugins with:
+I'm using [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins.
 
-```tmux
+```shell
+cd tmux/.tmux/plugins/tpm
+git pull origin master
+cd ../../../..
+stow tmux --no-folding
+tmux
 prefix + I
 ```
