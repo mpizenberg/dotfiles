@@ -9,3 +9,8 @@ f=$HOME/.bash_aliases && [ -f $f ] && source $f
 
 # Autocompletion for Git
 f=$HOME/.git-completion.bash && [ -f $f ] && source $f
+
+# Starship prompt
+eval "$(starship init bash)"
+
+source /home/matthieu/.config/broot/launcher/bash/br
