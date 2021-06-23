@@ -59,3 +59,8 @@ integratecancel = "!f() { \
 git checkout $2; \
 git branch -D $1-$2; \
 }; f"
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
