@@ -109,6 +109,12 @@ set shortmess+=c                 " don't give |ins-completion-menu| messages
 set signcolumn=yes               " always show signcolumns
 let g:coc_snippet_next="<Tab>"   " use Tab to navigate to next snippet placeholder
 let g:coc_snippet_prev="<S-Tab>" " use Shift-Tab to previous snippet placeholder
+
+" Jumping to definition
+nmap <silent> gd <Plug>(coc-definition)
+
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
 " }}}
 
 
