@@ -16,3 +16,16 @@ add_to_path $HOME/.jenv/shims
 
 # Add Matlab installed locally
 add_to_path $HOME/programs/matlab/bin
+
+# Add Cuda if installed
+add_to_path /opt/cuda/bin
+
+# Some aliases for command line tools
+# CF that nice article: https://zaiste.net/posts/shell-commands-rust/
+alias cat bat
+alias ls exa
+# alias grep rg    # better use rg directly actually
+# alias cloc tokei # better use tokei directly actually
+# alias find fd    # better use fd directly actually
+# alias sed sd     # better use sd directly actually
+# alias top ytop   # better use ytop directly actually
