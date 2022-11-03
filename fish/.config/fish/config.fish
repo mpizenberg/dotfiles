@@ -25,13 +25,29 @@ add_to_path $HOME/programs/matlab/bin
 # Add Cuda if installed
 add_to_path /opt/cuda/bin
 
+# Enable direnv if installed
+if type -q direnv
+    direnv hook fish | source
+end
+
+# Enable zoxide if installed
+if type -q zoxide
+    zoxide init fish | source
+end
+
+# Setup X Server if within WSL
+if grep -q -i wsl /proc/version
+    set ip (ip route list default | string split ' ' | head -n 3 | tail -n 1)
+    set -gx DISPLAY $ip:0
+    set -gx LIBGL_ALWAYS_INDIRECT 1
+end
+
 # Some aliases for command line tools
 # CF that nice article: https://zaiste.net/posts/shell-commands-rust/
 alias cat bat
 alias ls exa
 alias hx helix
 alias ps procs
-alias z zoxide
 # alias grep rg    # better use rg directly actually
 # alias cloc tokei # better use tokei directly actually
 # alias find fd    # better use fd directly actually
