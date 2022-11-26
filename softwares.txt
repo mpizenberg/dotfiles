@@ -1,17 +1,36 @@
 
 ################################ Desktop Environment
 
-Gnome 3
-(maybe test way-cooler later)
+Gnome 3 (try pop-os cosmic tiling one day)
 fish (shell)
 
 ################################ System
 
-htop
 OpenVPN
 etcher
 
+################################ CLI tools
+
+htop
+bottom (complementary to htop)
+procs (modern ps)
+stow (for dotfiles config)
+ripgrep (search in files)
+fd (better find)
+sd (basic text replacements)
+dust (simpler du)
+skim (fuzzy finder)
+hyperfine (benchmarks)
+zoxide (smart cd)
+delta (git diff tool)
+pastel (color picker and process)
+broot (file explorer)
+
 ################################ Programming
+
+wezterm
+zellij (terminal multiplexer)
+helix (editor)
 
 tmux
 terminator
@@ -20,7 +39,6 @@ neovim
 atom
 gedit
 meld
-stow
 
 conda (miniconda python)
 nvm (node version manager)
@@ -31,14 +49,15 @@ elm
 firefox (stable)
 chromium
 opera
+brave
 
 ################################ Entertainment
 
 calibre (ebooks)
 Orion (twitch client)
 Transmission
+WebTorrent Desktop
 vlc
-WebTorrent
 Kodi
 
 ################################ Multimedia

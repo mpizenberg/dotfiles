@@ -22,7 +22,7 @@ To install config files, I use GNU stow.
 To install vim config files for example:
 
 ```shell
-stow vim --no-folding
+stow -t ~ vim --no-folding
 ```
 
 ## fish
@@ -30,7 +30,7 @@ stow vim --no-folding
 I'm using [fisher](https://github.com/jorgebucaran/fisher) to manage fish plugins.
 
 ```shell
-stow fish --no-folding
+stow -t ~ fish --no-folding
 fisher self-update
 fisher
 ```
@@ -40,7 +40,7 @@ fisher
 I'm using [Plug](https://github.com/junegunn/vim-plug) to manage neovim / vim plugins.
 
 ```shell
-stow vim --no-folding
+stow -t ~ vim --no-folding
 vim
 :PlugUpgrade
 :PlugInstall
@@ -54,7 +54,28 @@ I'm using [tpm](https://github.com/tmux-plugins/tpm) to manage tmux plugins.
 cd tmux/.tmux/plugins/tpm
 git pull origin master
 cd ../../../..
-stow tmux --no-folding
+stow -t ~ tmux --no-folding
 tmux
 prefix + I
+```
+
+## Windows WSL
+
+For wsl, small changes are necessary since there is no GUI.
+For git, we can install Meld on windows, add it to the windows PATH and modify the merge tool section as follows:
+
+```
+[merge]
+tool = meld
+[mergetool "meld"]
+path = Meld.exe
+```
+
+For wezterm, I start directly zellij inside wsl with:
+
+```lua
+return {
+  default_prog = {"wsl", "zellij", "attach", "--create"},
+  ...
+}
 ```
