@@ -13,7 +13,9 @@ add_to_path $HOME/go/bin
 # Load conda if installed
 add_to_path $HOME/miniconda3/bin
 add_to_path $HOME/anaconda3/bin
-eval conda "shell.fish" "hook" $argv | source
+if type -q conda
+  eval conda "shell.fish" "hook" $argv | source
+end
 
 # Load jenv if installed
 add_to_path $HOME/.jenv/bin
