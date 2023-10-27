@@ -56,3 +56,13 @@ alias ps procs
 
 # alias du dust        # better use dust directly actually
 # alias time hyperfine # better use ytop directly actually
+
+# Created by `pipx` on 2023-03-27 08:47:16
+set PATH $PATH /home/matthieu/.local/bin
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+set -gx MAMBA_EXE "/home/matthieu/programs/micromamba"
+set -gx MAMBA_ROOT_PREFIX "/home/matthieu/micromamba"
+$MAMBA_EXE shell hook --shell fish --prefix $MAMBA_ROOT_PREFIX | source
+# <<< mamba initialize <<<
