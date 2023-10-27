@@ -1,6 +1,7 @@
 [user]
 name = Matthieu Pizenberg
 email = matthieu.pizenberg@gmail.com
+	signingkey = A167479D88D806B4
 
 [core]
 editor = vim
@@ -64,3 +65,7 @@ git branch -D $1-$2; \
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true

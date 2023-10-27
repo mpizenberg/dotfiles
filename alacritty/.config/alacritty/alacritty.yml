@@ -79,7 +79,7 @@ window:
   #
   # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
   # Set this to `None` to use the default theme variant.
-  #gtk_theme_variant: None
+  gtk_theme_variant: None
 
 #scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -357,10 +357,12 @@ font:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+shell:
+ program: /usr/bin/fish
+ args:
+   - --login # invoked as if as a login shell
+   - --command
+   - "zellij attach --create"
 
 # Startup directory
 #

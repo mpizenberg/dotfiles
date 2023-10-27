@@ -6,8 +6,10 @@ call plug#begin('~/.config/nvim/plugged')
 
 " User interface
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }    " Nerdtree file explorer
-Plug 'flazz/vim-colorschemes'            " Great collection of color themes
 Plug 'itchyny/lightline.vim'             " Light status line
+" Plug 'flazz/vim-colorschemes'            " Great collection of color themes
+Plug 'nanotech/jellybeans.vim'           " My default dark theme
+Plug 'sonph/onehalf', { 'rtp': 'vim' }   " Light theme onehalflight
 
 " Syntax and completion
 Plug 'tomtom/tcomment_vim'               " Comment any type of code (gcc, gcip)
@@ -37,14 +39,28 @@ call plug#end()                          " Add plugins to &runtimepath
 set mouse=a                      " enable mouse
 let mapleader=","                " leader is comma
 inoremap ,, <esc>
+" autocmd BufWritePre *.elm :call Elm_format()
 " }}}
 
+" temporary because of elmLS issue
+" func! Elm_format()
+"     let save_cursor = getcurpos()
+"     exe '%! elm-format --stdin'
+"     call setpos('.', save_cursor)
+" endfunc
 
 
 " COLOR #############################################################{{{
-set background=dark              " use dark background
 syntax enable                    " enable syntax processing
+" enable true colors support
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+" set background=dark              " use dark background
 colorscheme jellybeans           " awesome colorscheme
+" colorscheme onehalflight
 " }}}
 
 
@@ -112,6 +128,12 @@ let g:coc_snippet_prev="<S-Tab>" " use Shift-Tab to previous snippet placeholder
 
 " Jumping to definition
 nmap <silent> gd <Plug>(coc-definition)
+
+" Go to references
+nmap <silent> gr <Plug>(coc-references)
+
+" Go to next buffer
+nmap <silent> gn :bnext<CR>
 
 " Symbol renaming
 nmap <leader>rn <Plug>(coc-rename)
