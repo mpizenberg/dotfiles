@@ -60,7 +60,7 @@ end
 # Some aliases for command line tools
 # CF that nice article: https://zaiste.net/posts/shell-commands-rust/
 alias cat bat
-alias ls exa
+alias ls eza
 alias hx helix
 alias ps procs
 # alias grep rg    # better use rg directly actually

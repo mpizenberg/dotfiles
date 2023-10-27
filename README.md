@@ -13,10 +13,11 @@ git clone --recursive git@github.com:mpizenberg/dotfiles.git
 ```
 
 Some configurations require the use of powerline fonts / nerdfonts.
-You can use the already patched nerdfont [Ubuntu Mono][ubuntu-mono-font].
+You can use the already patched nerdfont [Fira Mono][fira-mono-font], [Ubuntu Mono][ubuntu-mono-font].
 Make sure to use it in your terminal preferences.
 
 [ubuntu-mono-font]: https://github.com/ryanoasis/nerd-fonts/releases/download/v1.1.0/UbuntuMono.zip
+[fira-mono-font]: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/FiraMono.zip
 
 To install config files, I use GNU stow.
 To install vim config files for example:
