@@ -41,7 +41,7 @@ gedit
 meld
 
 conda (miniconda python)
-nvm (node version manager)
+fnm (fast node manager)
 elm
 
 ################################ Web

@@ -10,5 +10,8 @@ alias egrep='egrep --color=auto'
 
 # Some useful aliases
 alias ll='ls -lFh'
-alias la='ls -A'
+alias la='ls -a'
 alias l='ls -CF'
+
+# Some program replacements
+# alias docker=podman

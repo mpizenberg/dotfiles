@@ -1,3 +1,17 @@
 [[language]]
 name = "python"
+scope = "source.python"
+roots = ["pyproject.toml"]
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+config = {} # <- important line (see https://github.com/helix-editor/helix/pull/6058)
+# Unfortunately we cannot have both pyright and ruff
+# (see https://github.com/charliermarsh/ruff-lsp/issues/81)
+# language-server = { command = "ruff-lsp" }
+# config = { settings = { args = [] } }
+formatter = { command = "black", args = ["-", "-q"] }
 auto-format = false
+
+[[language]]
+name = "elm"
+auto-format = true
+roots = ["elm.json"]
