@@ -58,6 +58,10 @@ if type -q fnm
   fnm env --use-on-cd | source
 end
 
+# Configure pnpm (faster npm)
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+fish_add_path $PNPM_HOME
+
 # Setup X Server if within WSL
 if grep -q -i wsl /proc/version
   set ip (ip route list default | string split ' ' | head -n 3 | tail -n 1)
@@ -72,20 +76,15 @@ alias la "ls -la"
 # Some aliases for command line tools
 # CF that nice article: https://zaiste.net/posts/shell-commands-rust/
 alias cat bat
-alias ls exa
+alias ls eza
 alias hx helix
+alias ps procs
 # alias docker podman
 # alias grep rg    # better use rg directly actually
 # alias cloc tokei # better use tokei directly actually
 # alias find fd    # better use fd directly actually
 # alias sed sd     # better use sd directly actually
 # alias top btm    # better use btm directly actually
+
 # alias du dust        # better use dust directly actually
 # alias time hyperfine # better use hyperfine directly actually
-
-# pnpm
-set -gx PNPM_HOME "/home/matthieu/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
