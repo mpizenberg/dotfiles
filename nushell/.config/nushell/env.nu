@@ -25,6 +25,8 @@ $env_path = (prepend_uniq '~/.aiken/bin' $env_path) # aiken
 $env_path = (prepend_uniq '~/go/bin' $env_path) # go
 $env_path = (prepend_uniq '~/miniconda3/bin' $env_path) # conda stuff
 $env_path = (prepend_uniq '~/anaconda3/bin' $env_path) # conda stuff
+$env_path = (prepend_uniq '~/mambaforge/bin' $env_path) # conda stuff
+# TODO: deal with conda/mamba init stuff
 $env_path = (prepend_uniq '~/.jenv/bin' $env_path) # jenv
 $env_path = (prepend_uniq '~/.jenv/shims' $env_path) # jenv
 $env_path = (prepend_uniq '~/programs/matlab/bin' $env_path) # matlab

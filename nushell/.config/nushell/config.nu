@@ -27,7 +27,10 @@ alias cat = bat
 use ~/.cache/starship/init.nu
 
 # Zoxide stuff
-# source ~/.zoxide.nu
+source ~/.zoxide.nu
 
 # Broot stuff
 source /home/matthieu/.config/broot/launcher/nushell/br
+
+# fnm stuff
+source fnm.nu
