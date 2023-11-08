@@ -7,12 +7,20 @@ $env.config = {
 # Conda stuff
 $env.CONDA_NO_PROMPT = true
 
-# Aliases for commands
-alias ll = ls -l
-alias la = ls -la
-alias hx = helix
+# Aliases for ls
+alias lsnu = ls
+def ls [dir?: string] {
+    lsnu (if $dir == null { "" } else { $dir }) | sort-by type name -i | grid -c
+}
+def la [dir?: string] {
+    lsnu -la (if $dir == null { "" } else { $dir }) | sort-by type name -i | select mode name target size modified
+}
+def ll [dir?: string] {
+    lsnu -l (if $dir == null { "" } else { $dir }) | sort-by type name -i | select mode name target size modified
+}
 
 # Aliases for CLI tools
+alias hx = helix
 alias cat = bat
 # alias docker = podman
 # alias grep = rg
