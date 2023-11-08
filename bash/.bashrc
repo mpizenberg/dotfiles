@@ -17,20 +17,20 @@ source /home/matthieu/.config/broot/launcher/bash/br
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/matthieu/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/matthieu/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/matthieu/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/matthieu/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/home/matthieu/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/matthieu/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/matthieu/mambaforge/bin:$PATH"
+        export PATH="/home/matthieu/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/home/matthieu/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/matthieu/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "/home/matthieu/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "/home/matthieu/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 
