@@ -1,13 +1,16 @@
 [[language]]
 name = "python"
 roots = ["pyproject.toml", "."]
-language-servers = ["pyright"]
-formatter = { command = "black", args = ["--quiet", "-"] }
+language-servers = ["pyright", "ruff"]
 auto-format = false
 
 [language-server.pyright]
 command = "pyright-langserver"
 args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff-lsp"
+config = { settings = { lint = { run = "onSave" } } }
 
 [[language]]
 name = "elm"
