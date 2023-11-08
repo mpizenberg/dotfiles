@@ -1,7 +1,8 @@
 # Nu shell config
 $env.config = {
     show_banner: false,
-    rm: { always_trash: true }
+    rm: { always_trash: true },
+    table: { mode: light }, # default, markdown
 }
 
 # Conda stuff
@@ -17,6 +18,11 @@ def la [dir?: string] {
 }
 def ll [dir?: string] {
     lsnu -l (if $dir == null { "" } else { $dir }) | sort-by type name -i | select mode name target size modified
+}
+
+# Sink that prints table in markdown
+def table_md [] {
+    let in_table = $in; $env.config.table.mode = markdown; $in_table | table
 }
 
 # Aliases for CLI tools
