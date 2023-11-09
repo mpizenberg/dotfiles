@@ -36,6 +36,7 @@ $env.DENO_INSTALL = ("~/.deno" | path expand) # deno
 $env_path = (prepend_uniq $'($env.DENO_INSTALL)/bin' $env_path) # deno
 $env.PNPM_HOME = ("~/.local/share/pnpm" | path expand) # pnpm
 $env_path = (prepend_uniq $'($env.PNPM_HOME)' $env_path) # pnpm
+$env_path = (prepend_uniq '~/.dmtr/bin' $env_path) # demeter
 $env.PATH = $env_path
 
 # Starship prompt stuff
