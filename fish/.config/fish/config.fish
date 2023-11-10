@@ -17,11 +17,12 @@ fish_add_path $HOME/.aiken/bin
 fish_add_path $HOME/go/bin
 
 # Load conda if installed
-fish_add_path $HOME/miniconda3/bin
-fish_add_path $HOME/anaconda3/bin
-fish_add_path $HOME/mambaforge/bin
+fish_add_path $HOME/miniforge3/bin
 if type -q conda
-  eval conda "shell.fish" "hook" $argv | source
+    eval conda "shell.fish" "hook" $argv | source
+end
+if test -f "$HOME/miniforge3/etc/fish/conf.d/mamba.fish"
+    source "$HOME/miniforge3/etc/fish/conf.d/mamba.fish"
 end
 
 # Load jenv if installed
