@@ -8,14 +8,14 @@ $env.config = {
 # Conda stuff
 $env.CONDA_NO_PROMPT = true
 
-# IDS stuff
-$env.GENICAM_GENTL32_PATH = "/opt/ids-peak_2.3.0.0-15823_amd64/lib/ids/cti"
-$env.GENICAM_GENTL64_PATH = "/opt/ids-peak_2.3.0.0-15823_amd64/lib/ids/cti"
+# # IDS stuff
+# $env.GENICAM_GENTL32_PATH = "/opt/ids-peak_2.3.0.0-15823_amd64/lib/ids/cti"
+# $env.GENICAM_GENTL64_PATH = "/opt/ids-peak_2.3.0.0-15823_amd64/lib/ids/cti"
 
 # Aliases for ls
 alias _ls = ls
 def ls [dir?: string] {
-    _ls (if $dir == null { "" } else { $dir }) | sort-by type name -i | grid -c
+    (if $dir == null { _ls } else { _ls $dir }) | sort-by type name -i | grid -c
 }
 def la [dir?: string] {
     _ls -la (if $dir == null { "" } else { $dir }) | sort-by type name -i | select mode name target size modified
@@ -59,3 +59,6 @@ source /home/matthieu/.config/broot/launcher/nushell/br
 
 # fnm stuff
 source fnm.nu
+
+# Conda stuff
+use mamba.nu

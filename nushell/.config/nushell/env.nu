@@ -36,7 +36,7 @@ $env.DENO_INSTALL = ("~/.deno" | path expand) # deno
 $env_path = (prepend_uniq $'($env.DENO_INSTALL)/bin' $env_path) # deno
 $env.PNPM_HOME = ("~/.local/share/pnpm" | path expand) # pnpm
 $env_path = (prepend_uniq $'($env.PNPM_HOME)' $env_path) # pnpm
-$env_path = (prepend_uniq '/opt/ids-peak_2.3.0.0-15823_amd64/bin' $env_path) # ids install
+# $env_path = (prepend_uniq '/opt/ids-peak_2.3.0.0-15823_amd64/bin' $env_path) # ids install
 $env.PATH = $env_path
 
 # Add entries to LD_LIBRARY_PATH
@@ -46,9 +46,9 @@ mut ld_path = if "LD_LIBRARY_PATH" in $env {
     []
 }
 
-$ld_path = (prepend_uniq '/opt/ids-peak_2.3.0.0-15823_amd64/lib' $ld_path) # IDS stuff
-# Why is the box_v4 lib dir not added to PYTHONPATH?
-# $ld_path = (prepend_uniq '~/miniforge3/envs/box_v4/lib' $ld_path) # IDS stuff
+# $ld_path = (prepend_uniq '/opt/ids-peak_2.3.0.0-15823_amd64/lib' $ld_path) # IDS stuff
+# # Why is the box_v4 lib dir not added to PYTHONPATH?
+# # $ld_path = (prepend_uniq '~/miniforge3/envs/box_v4/lib' $ld_path) # IDS stuff
 
 $env.LD_LIBRARY_PATH = $ld_path
 
@@ -57,7 +57,8 @@ mkdir ~/.cache/starship
 starship init nu | save -f ~/.cache/starship/init.nu
 
 # Zoxide stuff
-zoxide init nushell | save -f ~/.zoxide.nu
+# Temporary avoid until new release of zoxide
+# zoxide init nushell | save -f ~/.zoxide.nu
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)

@@ -1,5 +1,5 @@
 # Activate mamba environment
-export def-env activate [
+export def --env activate [
     env_name?: string@'nu-complete mamba envs' # name of the environment
 ] {
     let mamba_info = (mamba info --envs --json | from json)
@@ -73,7 +73,7 @@ export def-env activate [
 }
 
 # Deactivate currently active mamba environment
-export def-env deactivate [] {
+export def --env deactivate [] {
     let path_name = if "PATH" in $env { "PATH" } else { "Path" }
     $env.$path_name = $env.CONDA_OLD_PATH
 
