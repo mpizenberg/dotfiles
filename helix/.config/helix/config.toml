@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "zed_onedark"
 
 [editor]
 line-number = "absolute"
