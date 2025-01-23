@@ -7,6 +7,7 @@ fish (shell)
 ################################ System
 
 OpenVPN
+PIA (VPN Private Internet Access)
 etcher
 
 ################################ CLI tools
@@ -22,13 +23,17 @@ dust (simpler du)
 skim (fuzzy finder)
 hyperfine (benchmarks)
 zoxide (smart cd)
+eza (better cat)
+bat (better cat)
 delta (git diff tool)
 pastel (color picker and process)
 broot (file explorer)
 
 ################################ Programming
 
-wezterm
+ghostty (terminal)
+wezterm (terminal)
+rio (terminal)
 zellij (terminal multiplexer)
 helix (editor)
 
@@ -77,6 +82,7 @@ MeshLab
 
 ################################ Productivity
 
+Raycast (Mac launcher)
 Latex
 Libreoffice
 Scribus
