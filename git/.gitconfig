@@ -1,10 +1,11 @@
 [user]
 name = Matthieu Pizenberg
 email = matthieu.pizenberg@gmail.com
-	signingkey = A167479D88D806B4
+signingkey = A167479D88D806B4
 
 [core]
 editor = vim
+pager = delta
 
 [color]
 ui = auto
@@ -14,6 +15,7 @@ branch = auto
 
 [merge]
 tool = meld
+conflictstyle = diff3
 
 [rerere]
 enabled = true
@@ -28,44 +30,20 @@ lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C
 lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 lg = !"git lg1"
 
-# Integrate work from a remote : pull the request
-integratepull = "!f() { \
-echo '#############################################'; \
-echo 'Updating from ref repository :'; \
-echo ''; \
-git checkout $2; \
-git pull ref $2; \
-echo '#############################################'; \
-echo "fetching the pull request from $1 :"; \
-echo ''; \
-git fetch $1; \
-echo '#############################################'; \
-echo 'Trying to merge fast-forward the pull request :'; \
-echo ''; \
-git checkout -b $1-$2; \
-git merge --ff-only $1/$2; \
-}; f"
-
-# Integrate work from a remote : push the validated work
-integratepush = "!f() { \
-git checkout $2; \
-git merge --ff-only $1-$2; \
-git branch -D $1-$2; \
-git push ref $2; \
-}; f"
-
-# Integrate work from a remote : cancel the integration process
-# because builds or tests failed
-integratecancel = "!f() { \
-git checkout $2; \
-git branch -D $1-$2; \
-}; f"
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [init]
-	defaultBranch = main
+defaultBranch = main
+
 [commit]
-	gpgsign = true
+gpgsign = true
+
+[interactive]
+diffFilter = delta --color-only
+
+[delta]
+navigate = true    # use n and N to move between diff sections
+# delta detects terminal colors automatically; set one of these to disable auto-detection
+# dark = true
+# light = true
+
+[diff]
+colorMoved = default
