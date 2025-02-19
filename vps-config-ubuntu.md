@@ -93,6 +93,16 @@ I prefer using Podman as it doesn’t require a daemon with root permissions.
 
 ```sh
 apt install podman
+
 # start app1 at port 8000 as config in nginx, and with inner port 8888
-podman run --rm -p 8000:8888 ghcr.io/app1container:latest
+# the container automatically restarts if it crashes somehow
+podman run --name app1 --restart always -p 8000:8888 ghcr.io/app1container:latest
+
+# create a systemd service to be able to restart also on machine reboot
+podman generate systemd -name app1 --restart-policy=always > ~/.config/systemd/user/app1
+systemctl --user enable app1
+
+# Ensure lingering is enabled for user services so it starts on boot,
+# otherwise it will wait for the user ssh connection
+loginctl enable-linger $(whoami)
 ```
